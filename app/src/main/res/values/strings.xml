@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Profesor</string>
+    <string name="bienvenido_al_control_de_tareas">Bienvenido al Control de Tareas</string>
 </resources>
