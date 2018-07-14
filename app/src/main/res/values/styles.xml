@@ -23,4 +23,9 @@
         <item name="android:background">@null</item>
     </style>
 
+    <style name="MyFloatingButton" parent="Theme.AppCompat.Light">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:tint">@android:color/white</item>
+    </style>
+
 </resources>

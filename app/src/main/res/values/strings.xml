@@ -3,4 +3,20 @@
     <string name="bienvenido_al_control_de_tareas">Bienvenido al Control de Tareas</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nueva_tarea">Nueva Tarea</string>
+    <string name="nota">Nota</string>
+
+    <string-array name="spinner_asignaturas">
+        <item>Matemática</item>
+        <item>Biología</item>
+        <item>Lenguaje</item>
+        <item>Historia</item>
+    </string-array>
+
+    <string-array name="spinner_estudiantes">
+        <item>Pedro</item>
+        <item>Lucas</item>
+        <item>María</item>
+        <item>Leydi</item>
+    </string-array>
 </resources>
