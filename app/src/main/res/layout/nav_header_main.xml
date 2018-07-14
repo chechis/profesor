@@ -11,13 +11,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <LinearLayout
+
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="108dp"
         android:orientation="vertical"
         android:gravity="bottom"
         android:paddingBottom="8dp"
-        android:background="@drawable/cuaderno">
+        android:background="@drawable/cuaderno"
+        android:scaleType="centerCrop"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -28,6 +30,5 @@
             android:textStyle="bold"/>
 
 
-    </LinearLayout>
 
 </LinearLayout>
