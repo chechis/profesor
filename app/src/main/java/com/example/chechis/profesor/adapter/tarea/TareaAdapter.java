@@ -1,4 +1,4 @@
-package com.example.chechis.profesor.adapter.profesor;
+package com.example.chechis.profesor.adapter.tarea;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

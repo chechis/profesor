@@ -1,4 +1,4 @@
-package com.example.chechis.profesor.adapter.profesor;
+package com.example.chechis.profesor.adapter.tarea;
 
 public class Tarea {
 

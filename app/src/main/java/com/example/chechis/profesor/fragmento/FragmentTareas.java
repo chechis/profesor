@@ -18,12 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.chechis.profesor.Main2Activity;
 import com.example.chechis.profesor.R;
-import com.example.chechis.profesor.adapter.asignatura.Asignatura;
-import com.example.chechis.profesor.adapter.asignatura.AsignaturaAdapter;
-import com.example.chechis.profesor.adapter.profesor.Tarea;
-import com.example.chechis.profesor.adapter.profesor.TareaAdapter;
+import com.example.chechis.profesor.adapter.tarea.Tarea;
+import com.example.chechis.profesor.adapter.tarea.TareaAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
