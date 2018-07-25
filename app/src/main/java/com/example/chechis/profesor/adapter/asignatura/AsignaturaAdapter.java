@@ -14,11 +14,11 @@ import java.util.List;
 
 public class AsignaturaAdapter extends RecyclerView.Adapter<AsignaturaAdapter.AsignaturaHolder>{
 
-    private Activity activity;
+    private Context context;
     private List<Asignatura> asignaturas;
 
-    public AsignaturaAdapter(Activity activity, List<Asignatura> asignaturas) {
-        this.activity = activity;
+    public AsignaturaAdapter(Context context, List<Asignatura> asignaturas) {
+        this.context = context;
         this.asignaturas = asignaturas;
     }
 
@@ -37,17 +37,17 @@ public class AsignaturaAdapter extends RecyclerView.Adapter<AsignaturaAdapter.As
     @Override
     public AsignaturaHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = activity.getLayoutInflater().inflate(R.layout.plantilla_asignatura, parent, false);
-        AsignaturaHolder holder = new AsignaturaHolder(view);
+        View itemView= LayoutInflater.from(parent.getContext()).
+                inflate(R.layout.plantilla_asignatura, parent, false);
 
-        return holder;
+        return new AsignaturaHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(AsignaturaHolder holder, int position) {
 
-        holder.txtId.setText(asignaturas.get(position).getId());
-        holder.txtAsignatura.setText(asignaturas.get(position).getAsignatura());
+        holder.txtId.setText("Id :" +asignaturas.get(position).getId());
+        holder.txtAsignatura.setText("Asignatura :"+asignaturas.get(position).getAsignatura());
 
     }
 

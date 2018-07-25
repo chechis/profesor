@@ -12,8 +12,8 @@ import android.view.MenuItem;
 
 
 
+import com.example.chechis.profesor.fragmento.FragmentProfesor;
 import com.example.chechis.profesor.fragmento.FragmentAsignatura;
-import com.example.chechis.profesor.fragmento.FragmentEstudiantes;
 import com.example.chechis.profesor.fragmento.FragmentTareas;
 
 
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
-                new FragmentAsignatura()).commit();
+                new FragmentProfesor()).commit();
 
 
     }
@@ -64,12 +64,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             case R.id.nav1:
                 getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
-                        new FragmentAsignatura()).commit();
+                        new FragmentProfesor()).commit();
                 break;
 
             case R.id.nav2:
                 getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
-                        new FragmentEstudiantes()).commit();
+                        new FragmentAsignatura()).commit();
                 break;
 
             case R.id.nav3:

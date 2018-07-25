@@ -1,4 +1,4 @@
-package com.example.chechis.profesor.modelo;
+package com.example.chechis.profesor.modeloAlerta;
 
 public class Tarea {
 

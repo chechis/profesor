@@ -43,7 +43,7 @@ public class Profesor {
     }
 
     @Override
-    public String toString() {
-        return public String toString() {return "Id: "+id+"\nNombre Asignatura: "+nombreUsuario+"\nContrasena: "+contrasena+"\nRol :"+rol+"\n\n";;
+    public String toString()
+         {return "Id: "+id+"\nNombre Asignatura: "+nombreUsuario+"\nContrasena: "+contrasena+"\nRol :"+rol+"\n\n";
     }
 }
