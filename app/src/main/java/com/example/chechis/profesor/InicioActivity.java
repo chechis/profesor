@@ -19,10 +19,10 @@ public class InicioActivity extends AppCompatActivity {
         btnInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(InicioActivity.this, MainActivity.class);
-                startActivity(intent);
-                //Intent intent = new Intent(InicioActivity.this, Main2Activity.class);
+                //Intent intent = new Intent(InicioActivity.this, MainActivity.class);
                 //startActivity(intent);
+                Intent intent = new Intent(InicioActivity.this, Main2Activity.class);
+                startActivity(intent);
             }
         });
 

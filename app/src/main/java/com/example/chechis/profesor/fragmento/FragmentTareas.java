@@ -28,7 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class FragmentTareas extends Fragment {
+public class FragmentTareas extends Fragment implements TareaAdapter.TareaListener {
 
     private String url = "http://192.168.1.7:8084/respondiendo-HTTP/webapi/tarea";
     private ArrayList<Tarea> tareas= new ArrayList<>();
@@ -91,7 +91,7 @@ public class FragmentTareas extends Fragment {
             try {
                 JSONObject item = jsonArray.getJSONObject(i);
                 Tarea tarea = new Tarea();
-                tarea.setId(item.getString("id"));
+                //tarea.setId(item.getString("id"));
                 tarea.setTarea(item.getString("tarea"));
                 tarea.setNota(item.getString("nota"));
 
@@ -104,4 +104,13 @@ public class FragmentTareas extends Fragment {
     }
 
 
+    @Override
+    public void deleteTarea(int position) {
+
+    }
+
+    @Override
+    public void editTarea(int position) {
+
+    }
 }

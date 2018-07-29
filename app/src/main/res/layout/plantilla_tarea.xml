@@ -12,33 +12,75 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/txt_tarea_id"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="3"
+            android:layout_margin="10dp">
+            <TextView
+                android:id="@+id/txt_tarea_tarea"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Tarea"
+                android:padding="5dp"
+                android:textStyle="bold|italic"
+                />
+            <TextView
+                android:id="@+id/txt_tarea_estudiante"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Estudiante"
+                android:padding="5dp"
+                android:textStyle="bold|italic"
+                />
+            <TextView
+                android:id="@+id/txt_tarea_asignatura"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Asignatura"
+                android:padding="5dp"
+                android:textStyle="bold|italic"
+                />
+            <TextView
+                android:id="@+id/txt_tarea_nota"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Nota"
+                android:padding="5dp"
+                android:textStyle="bold|italic"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="ID"
-            android:padding="5dp"
-            android:gravity="center"/>
-        <TextView
-            android:id="@+id/txt_tarea_tarea"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Tarea"
-            android:padding="5dp"
-            android:textStyle="bold|italic"
-            android:gravity="center"/>
-        <TextView
-            android:id="@+id/txt_tarea_nota"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:text="Nota"
-            android:padding="5dp"
-            android:textStyle="bold|italic"
-            android:gravity="center"/>
+            android:orientation="horizontal"
+            android:layout_marginRight="6dp">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_delete_black_24dp"
+                android:id="@+id/btn_delete"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_edit_black_24dp"
+                android:id="@+id/btn_edit"/>
+
+
+        </LinearLayout>
+
+
+
     </LinearLayout>
+
 
 </android.support.v7.widget.CardView>

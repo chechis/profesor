@@ -2,18 +2,36 @@ package com.example.chechis.profesor.adapter.tarea;
 
 public class Tarea {
 
-    private String id;
+    private int id;
     private String tarea;
+    private String estudiante;
+    private String asignatura;
     private String nota;
 
     public Tarea() {
     }
 
-    public String getId() {
+    public String getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(String estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    public String getAsignatura() {
+        return asignatura;
+    }
+
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -35,6 +53,6 @@ public class Tarea {
 
     @Override
     public String toString() {
-        return "Id: "+id+"\nTarea: "+tarea+"\nNota: "+nota+"\n\n";
+        return "Id: "+id+"\nTarea: "+tarea+"\nEstudiante: "+estudiante+"\nAsignatura: "+asignatura+"\nNota: "+nota+"\n\n";
     }
 }

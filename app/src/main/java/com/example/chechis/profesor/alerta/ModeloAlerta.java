@@ -1,23 +1,23 @@
-package com.example.chechis.profesor.modeloAlerta;
+package com.example.chechis.profesor.alerta;
 
-public class Tarea {
+public class ModeloAlerta {
 
-    private enum Cursos{
+    public enum Cursos{
         Matematica, biologia, Lenguaje, Historia
     }
 
-    private enum Estudiantes {
+    public enum Estudiantes {
         Pedro, Lucas, Maria, Leydi
     }
 
     private String nombreTarea;
-    private Cursos tarea;
+    private Cursos cursos;
     private Estudiantes estudiantes;
     private String notaTarea;
 
-    public Tarea(String nombreTarea, Cursos tarea, Estudiantes estudiantes, String notaTarea) {
+    public ModeloAlerta(String nombreTarea, Cursos cursos, Estudiantes estudiantes, String notaTarea) {
         this.nombreTarea = nombreTarea;
-        this.tarea = tarea;
+        this.cursos = cursos;
         this.estudiantes = estudiantes;
         this.notaTarea = notaTarea;
     }
@@ -30,12 +30,12 @@ public class Tarea {
         this.nombreTarea = nombreTarea;
     }
 
-    public Cursos getTarea() {
-        return tarea;
+    public Cursos getCursos() {
+        return cursos;
     }
 
-    public void setTarea(Cursos tarea) {
-        this.tarea = tarea;
+    public void setCursos(Cursos cursos) {
+        this.cursos = cursos;
     }
 
     public Estudiantes getEstudiantes() {

@@ -27,6 +27,13 @@
 
         </activity>
         <activity android:name=".Main2Activity"/>
+        <provider
+            android:authorities="com.example.chechis.profesor.ProviderContent"
+            android:name=".ProviderContent"
+            android:exported="true"
+            android:multiprocess="true">
+
+        </provider>
 
     </application>
 
