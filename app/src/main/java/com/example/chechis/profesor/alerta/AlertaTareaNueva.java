@@ -18,24 +18,22 @@ import com.example.chechis.profesor.R;
 public class AlertaTareaNueva extends DialogFragment{
 
 
-    private AlertaEditTarea.EditarListener editarListener;
-    public interface EditarListener{
-        void editarTarea (ModeloAlerta tarea);
+    private NuevaListener listener;
+    public interface NuevaListener{
+        void nuevaTarea (ModeloAlerta alerta);
     }
 
     private Button btnRegistrar, btnCancelar;
     private TextInputLayout editTarea, editNota;
     private Spinner spnEstudiante, spnAsignatura;
-    private EditText tareaEdit, notaEdit;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-
         try {
-            editarListener = (AlertaEditTarea.EditarListener) context;
+            listener = (NuevaListener) context;
         }catch (ClassCastException ex){
-            throw new ClassCastException("El contexto se debe implementar");
+            throw new ClassCastException("El contexto debe implementar la interfaz");
         }
     }
 
@@ -54,9 +52,6 @@ public class AlertaTareaNueva extends DialogFragment{
 
         editTarea=(TextInputLayout) dialogo.findViewById(R.id.edit_nombre_tarea1);
         editNota=(TextInputLayout) dialogo.findViewById(R.id.edit_nota2);
-
-        tareaEdit = (EditText) dialogo.findViewById(R.id.edit_nombre_tarea2);
-        notaEdit = (EditText) dialogo.findViewById(R.id.edit_nota21);
 
         spnEstudiante = (Spinner) dialogo.findViewById(R.id.spinner_estudiante);
         spnAsignatura = (Spinner) dialogo.findViewById(R.id.spinner_asignatura);
@@ -132,7 +127,7 @@ public class AlertaTareaNueva extends DialogFragment{
             if (login){
 
                 ModeloAlerta alerta = new ModeloAlerta(tarea, cursos, estudiantes, nota);
-                editarListener.editarTarea(alerta);
+                listener.nuevaTarea(alerta);
                 dismiss();
 
             }

@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.chechis.profesor.adapter.tarea.Tarea;
+import com.example.chechis.profesor.alerta.AlertaEditTarea;
+import com.example.chechis.profesor.alerta.AlertaTareaNueva;
+import com.example.chechis.profesor.alerta.Probando;
+
 public class InicioActivity extends AppCompatActivity {
 
-    Button btnInicio;
+    Button btnInicio, btnAlerta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +24,15 @@ public class InicioActivity extends AppCompatActivity {
         btnInicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(InicioActivity.this, MainActivity.class);
-                //startActivity(intent);
-                Intent intent = new Intent(InicioActivity.this, Main2Activity.class);
+                Intent intent = new Intent(InicioActivity.this, MainActivity.class);
                 startActivity(intent);
+                //Intent intent = new Intent(InicioActivity.this, Main2Activity.class);
+                //startActivity(intent);
             }
         });
 
 
     }
+
+
 }

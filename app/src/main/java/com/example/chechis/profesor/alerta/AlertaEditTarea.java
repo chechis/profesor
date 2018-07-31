@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.chechis.profesor.R;
+import com.example.chechis.profesor.alerta.ModeloAlerta;
 
 public class AlertaEditTarea extends DialogFragment {
 

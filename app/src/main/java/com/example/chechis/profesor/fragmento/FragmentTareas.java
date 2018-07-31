@@ -21,17 +21,20 @@ import com.android.volley.toolbox.Volley;
 import com.example.chechis.profesor.R;
 import com.example.chechis.profesor.adapter.tarea.Tarea;
 import com.example.chechis.profesor.adapter.tarea.TareaAdapter;
+import com.example.chechis.profesor.alerta.AlertaEditTarea;
+import com.example.chechis.profesor.alerta.AlertaTareaNueva;
+import com.example.chechis.profesor.alerta.ModeloAlerta;
+import com.example.chechis.profesor.alerta.Probando;
+import com.example.chechis.profesor.almacenamiento.BaseDatos;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class FragmentTareas extends Fragment implements TareaAdapter.TareaListener {
-
-    private String url = "http://192.168.1.7:8084/respondiendo-HTTP/webapi/tarea";
-    private ArrayList<Tarea> tareas= new ArrayList<>();
+public class FragmentTareas extends Fragment {
 
     @Nullable
     @Override
@@ -40,77 +43,6 @@ public class FragmentTareas extends Fragment implements TareaAdapter.TareaListen
         return view;
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        FloatingActionButton floatingActionButton = (FloatingActionButton) view.findViewById(R.id.btn_flotatne);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.recycler_tarea);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2,
-                GridLayoutManager.VERTICAL, false));
-
-        final TareaAdapter adapter = new TareaAdapter(getContext(), tareas);
-        recyclerView.setAdapter(adapter);
-
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-        final ProgressDialog dialog = new ProgressDialog(getContext());
-        dialog.setMessage("Por favor espere...");
-        dialog.show();
 
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        deserializarJSON(response);
-                        adapter.notifyDataSetChanged();
-                        if (dialog.isShowing()) dialog.dismiss();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getContext(), "Error al realizar la peticion\n "+error.getMessage(), Toast.LENGTH_SHORT).show();
-                        if (dialog.isShowing()) dialog.dismiss();
-                    }
-                });
-        queue.add(jsonArrayRequest);
-    }
-
-    public void deserializarJSON (JSONArray jsonArray){
-
-        for (int i=0; i < jsonArray.length(); i++){
-            try {
-                JSONObject item = jsonArray.getJSONObject(i);
-                Tarea tarea = new Tarea();
-                //tarea.setId(item.getString("id"));
-                tarea.setTarea(item.getString("tarea"));
-                tarea.setNota(item.getString("nota"));
-
-                tareas.add(tarea);
-
-            }catch (JSONException e){
-                Toast.makeText(getContext(), "Error al procesar la respuesta de la peticion", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-
-    @Override
-    public void deleteTarea(int position) {
-
-    }
-
-    @Override
-    public void editTarea(int position) {
-
-    }
 }
