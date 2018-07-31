@@ -1,6 +1,8 @@
 package com.example.chechis.profesor;
 
 import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -10,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -23,6 +26,9 @@ import com.example.chechis.profesor.adapter.tarea.Tarea;
 import com.example.chechis.profesor.adapter.tarea.TareaAdapter;
 import com.example.chechis.profesor.alerta.AlertaTareaNueva;
 import com.example.chechis.profesor.alerta.ModeloAlerta;
+import com.example.chechis.profesor.almacenamiento.BaseDatos;
+import com.example.chechis.profesor.almacenamiento.Estructura;
+import com.example.chechis.profesor.almacenamiento.Servicio;
 import com.example.chechis.profesor.fragmento.FragmentProfesor;
 import com.example.chechis.profesor.fragmento.FragmentAsignatura;
 import com.example.chechis.profesor.fragmento.FragmentTareas;
@@ -32,13 +38,21 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-                                                    AlertaTareaNueva.NuevaListener{
+                                                    AlertaTareaNueva.NuevaListener, TareaAdapter.TareaListener{
 
     private String url = "http://192.168.1.7:8084/respondiendo-HTTP/webapi/tarea";
-    private ArrayList<Tarea> tareas= new ArrayList<>();
+
+    private Servicio servicio;
+    private SQLiteDatabase myDatabase;
+    RecyclerView recyclerView;
+    private TareaAdapter adapter;
+    private ArrayList<Tarea> listaTarea;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +74,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
                 new FragmentProfesor()).commit();
 
-
-        RecyclerView recyclerView= (RecyclerView) findViewById(R.id.recycler_tarea);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2,
-                GridLayoutManager.VERTICAL, false));
-
-        final TareaAdapter adapter = new TareaAdapter(MainActivity.this, tareas);
-        recyclerView.setAdapter(adapter);
+        listaTarea = new ArrayList<>();
+        actualizarLista();
+        llenandoAdapter(listaTarea);
 
         //RequestQueue queue = Volley.newRequestQueue(getContext());
         //final ProgressDialog dialog = new ProgressDialog(getContext());
@@ -106,6 +115,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    private void actualizarLista (){
+        BaseDatos baseDatos = new BaseDatos(this);
+        myDatabase = baseDatos.getWritableDatabase();
+
+        Cursor cursor = myDatabase.rawQuery("SELECT * FROM "+ Estructura.EstructuraBase.TABLE_NAME+";", null);
+        listaTarea.clear();
+        if (cursor.moveToFirst()){
+            do {
+                int id = cursor.getInt(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ID));
+                String nombreTarea = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_TAREA));
+                String estudiante = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ESTUDIANTE));
+                String asignatura = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ASIGNATURA));
+                String nota = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_NOTA));
+
+                listaTarea.add(new Tarea(id, nombreTarea, estudiante, asignatura, nota));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+    }
+
+    private void llenandoAdapter (List<Tarea> lista){
+        adapter = new TareaAdapter(lista);
+        adapter.setTareaListener(this);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_tarea);
+        //recyclerView.setHasFixedSize(true);
+        //recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2,
+                //GridLayoutManager.VERTICAL, false));
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.setAdapter(adapter);
+    }
+
     public void deserializarJSON (JSONArray jsonArray){
 
         for (int i=0; i < jsonArray.length(); i++){
@@ -116,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 tarea.setTarea(item.getString("tarea"));
                 tarea.setNota(item.getString("nota"));
 
-                tareas.add(tarea);
+                listaTarea.add(tarea);
 
             }catch (JSONException e){
                 Toast.makeText(MainActivity.this, "Error al procesar la respuesta de la peticion", Toast.LENGTH_SHORT).show();
@@ -165,6 +207,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void nuevaTarea(ModeloAlerta alerta) {
-        
+
+        String nombreTarea = alerta.getNombreTarea();
+        String curso = alerta.getCursos().toString();
+        String estudiante = alerta.getEstudiantes().toString();
+        String nota = alerta.getNotaTarea();
+
+        BaseDatos baseDatos = new BaseDatos(this);
+        servicio = new Servicio(this);
+        servicio.guardarTarea(nombreTarea, curso, estudiante, nota, baseDatos, this);
+        actualizarLista();
+        adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void deleteTarea(int position) {
+
+    }
+
+    @Override
+    public void editTarea(int position) {
+
     }
 }

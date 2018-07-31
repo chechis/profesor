@@ -1,5 +1,6 @@
 package com.example.chechis.profesor.adapter.tarea;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,8 +17,6 @@ import java.util.List;
 
 public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaHolder>{
 
-
-    private Context context;
     private TareaListener tareaListener;
     public interface TareaListener{
         void deleteTarea(int position);
@@ -26,14 +25,13 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaHolder>
     }
     private List<Tarea> tareas;
 
-    public TareaAdapter(Context context, List<Tarea> tareas) {
-        this.context = context;
+    public TareaAdapter(List<Tarea> tareas) {
         this.tareas = tareas;
     }
 
-    protected class TareaHolder extends RecyclerView.ViewHolder{
-        protected TextView  txtTarea, txtEstudiante, txtAsignatura ,txtNota;
-        protected ImageButton btnEditar, btnBorrar;
+    public class TareaHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView  txtTarea, txtEstudiante, txtAsignatura ,txtNota;
+        ImageButton btnEditar, btnBorrar;
 
         public TareaHolder (View itemView){
             super(itemView);
@@ -54,16 +52,15 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaHolder>
             });
 
             btnBorrar= (ImageButton) itemView.findViewById(R.id.btn_delete);
-            btnBorrar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (tareaListener != null){
-                        tareaListener.deleteTarea(getAdapterPosition());
-                    }
-                }
-            });
+            btnBorrar.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View view) {
+            if (tareaListener != null){
+                tareaListener.deleteTarea(getAdapterPosition());
+            }
+        }
     }
 
     @Override
@@ -78,13 +75,13 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaHolder>
     @Override
     public void onBindViewHolder(TareaAdapter.TareaHolder holder, int position) {
 
-        //Tarea tarea = tareas.get(position);
+        Tarea tarea = tareas.get(position);
 
 
-        holder.txtTarea.setText(tareas.get(position).getTarea());
-        holder.txtEstudiante.setText(tareas.get(position).getEstudiante());
-        holder.txtAsignatura.setText(tareas.get(position).getAsignatura());
-        holder.txtNota.setText(tareas.get(position).getNota());
+        holder.txtTarea.setText(tarea.getTarea());
+        holder.txtEstudiante.setText(tarea.getEstudiante());
+        holder.txtAsignatura.setText(tarea.getAsignatura());
+        holder.txtNota.setText(tarea.getNota());
     }
 
     @Override

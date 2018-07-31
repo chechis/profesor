@@ -33,7 +33,7 @@ public class AlertaTareaNueva extends DialogFragment{
         try {
             listener = (NuevaListener) context;
         }catch (ClassCastException ex){
-            throw new ClassCastException("El contexto debe implementar la interfaz");
+            throw new ClassCastException("El contexto debe implementar la interfaz ModeloAlerta");
         }
     }
 
