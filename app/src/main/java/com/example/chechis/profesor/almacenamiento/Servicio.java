@@ -35,7 +35,7 @@ public class Servicio {
         content.put(Estructura.EstructuraBase.COLUMN_NAME_ASIGNATURA, asignatura);
         content.put(Estructura.EstructuraBase.COLUMN_NAME_NOTA, nota);
         sq.insert(Estructura.EstructuraBase.TABLE_NAME, null, content);
-        Toast.makeText(activity, "Tarea " + tarea + " del estudiante "+estudiante+ " ha sido guardado", Toast.LENGTH_SHORT).show();
+        Toast.makeText(activity, "Tarea " + tarea +asignatura+ " del estudiante "+estudiante+ "Con nota : "+nota+ " ha sido guardado", Toast.LENGTH_LONG).show();
 
         sq.close();
 

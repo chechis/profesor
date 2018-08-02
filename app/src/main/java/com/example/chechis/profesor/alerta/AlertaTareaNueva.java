@@ -59,7 +59,7 @@ public class AlertaTareaNueva extends DialogFragment{
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editarTarea();
+                nuevaTarea();
             }
         });
         btnCancelar.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +73,7 @@ public class AlertaTareaNueva extends DialogFragment{
         return builder.create();
     }
 
-    private void editarTarea(){
+    private void nuevaTarea(){
 
         boolean login = true;
 

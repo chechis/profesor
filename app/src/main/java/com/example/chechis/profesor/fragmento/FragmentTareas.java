@@ -43,6 +43,4 @@ public class FragmentTareas extends Fragment {
         return view;
     }
 
-
-
 }
