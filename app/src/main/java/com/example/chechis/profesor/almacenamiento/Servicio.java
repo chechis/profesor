@@ -37,7 +37,7 @@ public class Servicio {
         sq.insert(Estructura.EstructuraBase.TABLE_NAME, null, content);
         Toast.makeText(activity, "Tarea " + tarea +asignatura+ " del estudiante "+estudiante+ "Con nota : "+nota+ " ha sido guardado", Toast.LENGTH_LONG).show();
 
-        sq.close();
+
 
     }
 
@@ -48,13 +48,13 @@ public class Servicio {
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
         ContentValues content = new ContentValues();
 
-        String comparador = Estructura.EstructuraBase.COLUMN_NAME_ID +" LIKE "+ id;
+        //String comparador = Estructura.EstructuraBase.COLUMN_NAME_ID +" LIKE "+ id;
         content.put(Estructura.EstructuraBase.COLUMN_NAME_TAREA, tarea);
         content.put(Estructura.EstructuraBase.COLUMN_NAME_ESTUDIANTE, estudiante);
         content.put(Estructura.EstructuraBase.COLUMN_NAME_ASIGNATURA, asignatura);
         content.put(Estructura.EstructuraBase.COLUMN_NAME_NOTA, nota);
 
-        sq.update(Estructura.EstructuraBase.TABLE_NAME, content, comparador, null);
+        //sq.update(Estructura.EstructuraBase.TABLE_NAME, content, comparador, null);
 
         Toast.makeText(activity, "Se ha actualizado la terea del estudiante  " + estudiante, Toast.LENGTH_SHORT).show();
 

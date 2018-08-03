@@ -123,13 +123,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listaTarea.clear();
         if (cursor.moveToFirst()){
             do {
-                int id = cursor.getInt(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ID));
+                //int id = cursor.getInt(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ID));
                 String nombreTarea = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_TAREA));
                 String estudiante = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ESTUDIANTE));
                 String asignatura = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ASIGNATURA));
                 String nota = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_NOTA));
 
-                listaTarea.add(new Tarea(id, nombreTarea, estudiante, asignatura, nota));
+                listaTarea.add(new Tarea(nombreTarea, estudiante, asignatura, nota));
             }while (cursor.moveToNext());
         }
         cursor.close();
@@ -214,8 +214,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String nota = alerta.getNotaTarea();
 
         BaseDatos baseDatos = new BaseDatos(this);
+        SQLiteDatabase sq = baseDatos.getWritableDatabase();
         servicio = new Servicio(this);
         servicio.guardarTarea(nombreTarea, curso, estudiante, nota, baseDatos, this);
+        sq.close();
         actualizarLista();
         adapter.notifyDataSetChanged();
 

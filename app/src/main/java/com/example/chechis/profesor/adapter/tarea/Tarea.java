@@ -19,6 +19,13 @@ public class Tarea {
         this.nota = nota;
     }
 
+    public Tarea(String tarea, String estudiante, String asignatura, String nota) {
+        this.tarea = tarea;
+        this.estudiante = estudiante;
+        this.asignatura = asignatura;
+        this.nota = nota;
+    }
+
     public String getEstudiante() {
         return estudiante;
     }

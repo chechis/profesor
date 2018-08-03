@@ -88,28 +88,28 @@ public class AlertaTareaNueva extends DialogFragment{
                     estudiantes= ModeloAlerta.Estudiantes.Pedro;
                     break;
                 case 1:
-                    estudiantes = ModeloAlerta.Estudiantes.Leydi;
+                    estudiantes = ModeloAlerta.Estudiantes.Lucas;
                     break;
                 case 2:
-                    estudiantes= ModeloAlerta.Estudiantes.Lucas;
+                    estudiantes= ModeloAlerta.Estudiantes.Maria;
                     break;
                 case 3:
-                    estudiantes = ModeloAlerta.Estudiantes.Maria;
+                    estudiantes = ModeloAlerta.Estudiantes.Leydi;
                     break;
             }
             ModeloAlerta.Cursos cursos = ModeloAlerta.Cursos.biologia;
             switch (spnAsignatura.getSelectedItemPosition()){
                 case 0:
-                    cursos= ModeloAlerta.Cursos.biologia;
+                    cursos= ModeloAlerta.Cursos.Matematica;
                     break;
                 case 1:
-                    cursos = ModeloAlerta.Cursos.Historia;
+                    cursos = ModeloAlerta.Cursos.biologia;
                     break;
                 case 2:
                     cursos = ModeloAlerta.Cursos.Lenguaje;
                     break;
                 case 3:
-                    cursos = ModeloAlerta.Cursos.Matematica;
+                    cursos = ModeloAlerta.Cursos.Historia;
                     break;
             }
 
