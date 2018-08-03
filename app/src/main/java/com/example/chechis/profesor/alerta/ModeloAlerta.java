@@ -10,6 +10,7 @@ public class ModeloAlerta {
         Pedro, Lucas, Maria, Leydi
     }
 
+    private int Id;
     private String nombreTarea;
     private Cursos cursos;
     private Estudiantes estudiantes;
@@ -20,6 +21,22 @@ public class ModeloAlerta {
         this.cursos = cursos;
         this.estudiantes = estudiantes;
         this.notaTarea = notaTarea;
+    }
+
+    public ModeloAlerta(int id, String nombreTarea, Cursos cursos, Estudiantes estudiantes, String notaTarea) {
+        Id = id;
+        this.nombreTarea = nombreTarea;
+        this.cursos = cursos;
+        this.estudiantes = estudiantes;
+        this.notaTarea = notaTarea;
+    }
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
     }
 
     public String getNombreTarea() {

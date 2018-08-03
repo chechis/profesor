@@ -13,14 +13,14 @@ public class BaseDatos extends SQLiteOpenHelper {
 
     private static final String Sentencia =
             "CREATE TABLE " + Estructura.EstructuraBase.TABLE_NAME + " ("
-                    + Estructura.EstructuraBase._ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + Estructura.EstructuraBase.COLUMN_NAME_ID+ " INTEGER PRIMARY KEY AUTOINCREMENT, "
                     + Estructura.EstructuraBase.COLUMN_NAME_TAREA + tipo + coma
                     + Estructura.EstructuraBase.COLUMN_NAME_ESTUDIANTE + tipo + coma
                     + Estructura.EstructuraBase.COLUMN_NAME_ASIGNATURA + tipo + coma
                     + Estructura.EstructuraBase.COLUMN_NAME_NOTA + tipo + " )";
 
-    public static final int DATABASE_VERSION = 4;
-    public static final String DATABASE_NAME = "Notas.sqLite";
+    public static final int DATABASE_VERSION = 5;
+    public static final String DATABASE_NAME = "Puntuacion.sqLite";
 
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + Estructura.EstructuraBase.TABLE_NAME;
 

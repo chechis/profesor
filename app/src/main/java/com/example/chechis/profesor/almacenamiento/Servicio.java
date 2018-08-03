@@ -35,7 +35,7 @@ public class Servicio {
         content.put(Estructura.EstructuraBase.COLUMN_NAME_ASIGNATURA, asignatura);
         content.put(Estructura.EstructuraBase.COLUMN_NAME_NOTA, nota);
         sq.insert(Estructura.EstructuraBase.TABLE_NAME, null, content);
-        Toast.makeText(activity, "Tarea " + tarea +asignatura+ " del estudiante "+estudiante+ "Con nota : "+nota+ " ha sido guardado", Toast.LENGTH_LONG).show();
+        Toast.makeText(activity, "Tarea " + tarea+ " del estudiante "+estudiante+" ha sido guardado", Toast.LENGTH_LONG).show();
 
 
 
@@ -48,20 +48,19 @@ public class Servicio {
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
         ContentValues content = new ContentValues();
 
-        //String comparador = Estructura.EstructuraBase.COLUMN_NAME_ID +" LIKE "+ id;
+        String comparador = Estructura.EstructuraBase.COLUMN_NAME_ID +" LIKE "+ id;
         content.put(Estructura.EstructuraBase.COLUMN_NAME_TAREA, tarea);
         content.put(Estructura.EstructuraBase.COLUMN_NAME_ESTUDIANTE, estudiante);
         content.put(Estructura.EstructuraBase.COLUMN_NAME_ASIGNATURA, asignatura);
         content.put(Estructura.EstructuraBase.COLUMN_NAME_NOTA, nota);
 
-        //sq.update(Estructura.EstructuraBase.TABLE_NAME, content, comparador, null);
+        sq.update(Estructura.EstructuraBase.TABLE_NAME, content, comparador, null);
 
         Toast.makeText(activity, "Se ha actualizado la terea del estudiante  " + estudiante, Toast.LENGTH_SHORT).show();
 
-        sq.close();
     }
 
-    public void eliminarDonante (Tarea tarea, BaseDatos baseDatos, Activity activity){
+    public void eliminarTarea (Tarea tarea, BaseDatos baseDatos, Activity activity){
 
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
 
@@ -69,7 +68,6 @@ public class Servicio {
                 new Object[]{tarea.getId()});
 
         Toast.makeText(activity, "Se ha eliminado la tarea", Toast.LENGTH_SHORT).show();
-        sq.close();
     }
 
 

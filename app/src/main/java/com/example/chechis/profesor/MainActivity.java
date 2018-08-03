@@ -1,6 +1,7 @@
 package com.example.chechis.profesor;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
@@ -9,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.chechis.profesor.adapter.tarea.Tarea;
 import com.example.chechis.profesor.adapter.tarea.TareaAdapter;
+import com.example.chechis.profesor.alerta.AlertaEditTarea;
 import com.example.chechis.profesor.alerta.AlertaTareaNueva;
 import com.example.chechis.profesor.alerta.ModeloAlerta;
 import com.example.chechis.profesor.almacenamiento.BaseDatos;
@@ -42,7 +45,8 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
-                                                    AlertaTareaNueva.NuevaListener, TareaAdapter.TareaListener{
+                                                    AlertaTareaNueva.NuevaListener, TareaAdapter.TareaListener,
+                                                    AlertaEditTarea.EditarListener{
 
     private String url = "http://192.168.1.7:8084/respondiendo-HTTP/webapi/tarea";
 
@@ -123,13 +127,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         listaTarea.clear();
         if (cursor.moveToFirst()){
             do {
-                //int id = cursor.getInt(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ID));
+                int id = cursor.getInt(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ID));
                 String nombreTarea = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_TAREA));
                 String estudiante = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ESTUDIANTE));
                 String asignatura = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_ASIGNATURA));
                 String nota = cursor.getString(cursor.getColumnIndex(Estructura.EstructuraBase.COLUMN_NAME_NOTA));
 
-                listaTarea.add(new Tarea(nombreTarea, estudiante, asignatura, nota));
+                listaTarea.add(new Tarea(id, nombreTarea, estudiante, asignatura, nota));
             }while (cursor.moveToNext());
         }
         cursor.close();
@@ -139,12 +143,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter = new TareaAdapter(lista);
         adapter.setTareaListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_tarea);
-        //recyclerView.setHasFixedSize(true);
-        //recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2,
-                //GridLayoutManager.VERTICAL, false));
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2,
+                GridLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
     }
 
@@ -225,11 +226,51 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void deleteTarea(int position) {
+        final int posicion = position;
+        AlertDialog.Builder builder= new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("¿Está seguro de que desea eliminar la tarea?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        BaseDatos baseDatos = new BaseDatos(MainActivity.this);
+                        SQLiteDatabase sq = baseDatos.getWritableDatabase();
+                        Tarea tarea = listaTarea.get(posicion);
+                        Servicio servicio = new Servicio(tarea, MainActivity.this);
+                        servicio.eliminarTarea(tarea, baseDatos, MainActivity.this);
+                        sq.close();
+                        actualizarLista();
+                        adapter.notifyDataSetChanged();
+                    }
+                }).setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        }).create().show();
+
 
     }
 
     @Override
     public void editTarea(int position) {
+
+        Tarea tarea = listaTarea.get(position);
+        int id= tarea.getId();
+        String nombreTarea = tarea.getTarea();
+        String asignatura = tarea.getAsignatura();
+        String estudiante = tarea.getEstudiante();
+        String nota = tarea.getNota();
+
+        AlertaEditTarea editTarea = new AlertaEditTarea();
+        editTarea.show(getSupportFragmentManager(), "Editar tarea");
+
+        editTarea.getTxtId(id);
+        editTarea.getTxtTarea(nombreTarea);
+        editTarea.getTxtNota(nota);
+    }
+
+    @Override
+    public void editarTarea(ModeloAlerta tarea) {
 
     }
 }

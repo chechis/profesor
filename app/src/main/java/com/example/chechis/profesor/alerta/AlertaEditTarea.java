@@ -95,28 +95,28 @@ public class AlertaEditTarea extends DialogFragment {
                     estudiantes= ModeloAlerta.Estudiantes.Pedro;
                     break;
                 case 1:
-                    estudiantes = ModeloAlerta.Estudiantes.Leydi;
+                    estudiantes = ModeloAlerta.Estudiantes.Lucas;
                     break;
                 case 2:
-                    estudiantes= ModeloAlerta.Estudiantes.Lucas;
+                    estudiantes= ModeloAlerta.Estudiantes.Maria;
                     break;
                 case 3:
-                    estudiantes = ModeloAlerta.Estudiantes.Maria;
+                    estudiantes = ModeloAlerta.Estudiantes.Leydi;
                     break;
             }
             ModeloAlerta.Cursos cursos = ModeloAlerta.Cursos.biologia;
             switch (spnAsignatura.getSelectedItemPosition()){
                 case 0:
-                    cursos= ModeloAlerta.Cursos.biologia;
+                    cursos= ModeloAlerta.Cursos.Matematica;
                     break;
                 case 1:
-                    cursos = ModeloAlerta.Cursos.Historia;
+                    cursos = ModeloAlerta.Cursos.biologia;
                     break;
                 case 2:
                     cursos = ModeloAlerta.Cursos.Lenguaje;
                     break;
                 case 3:
-                    cursos = ModeloAlerta.Cursos.Matematica;
+                    cursos = ModeloAlerta.Cursos.Historia;
                     break;
             }
 
@@ -133,7 +133,7 @@ public class AlertaEditTarea extends DialogFragment {
 
             if (login){
 
-                ModeloAlerta alerta = new ModeloAlerta(tarea, cursos, estudiantes, nota);
+                ModeloAlerta alerta = new ModeloAlerta(this.txtId,tarea, cursos, estudiantes, nota);
                 editarListener.editarTarea(alerta);
                 dismiss();
 
@@ -146,7 +146,26 @@ public class AlertaEditTarea extends DialogFragment {
 
 
     private void llenando (){
-
+        tareaEdit.setText(this.txtTarea);
+        notaEdit.setText(this.txtNota);
 
     }
+
+    private int txtId;
+    private String txtTarea;
+    private String txtNota;
+
+
+    public int getTxtId(int id) {
+        return txtId= id;
+    }
+
+    public String getTxtTarea(String tarea) {
+        return txtTarea= tarea;
+    }
+
+    public String getTxtNota(String nota) {
+        return txtNota= nota;
+    }
+
 }
