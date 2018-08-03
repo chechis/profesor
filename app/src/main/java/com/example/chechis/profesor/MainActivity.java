@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
-                new FragmentProfesor()).commit();
+        //getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
+                //new FragmentProfesor()).commit();
 
         listaTarea = new ArrayList<>();
         actualizarLista();
@@ -271,6 +271,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void editarTarea(ModeloAlerta tarea) {
+        int id = tarea.getId();
+        String nombreTarea = tarea.getNombreTarea();
+        String asignatura = tarea.getCursos().toString();
+        String estudiante = tarea.getEstudiantes().toString();
+        String nota = tarea.getNotaTarea();
 
+        BaseDatos baseDatos = new BaseDatos(this);
+        SQLiteDatabase sq = baseDatos.getWritableDatabase();
+        Servicio servicio = new Servicio(this);
+        servicio.modificarTarea(id, nombreTarea, estudiante, asignatura, nota, baseDatos, this);
+        sq.close();
+        actualizarLista();
+        adapter.notifyDataSetChanged();
     }
 }
