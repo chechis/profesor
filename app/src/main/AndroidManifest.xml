@@ -26,10 +26,10 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".Main2Activity"/>
+
         <provider
             android:authorities="com.example.chechis.profesor.ProveedorContenidos"
-            android:name=".ProviderContent"
+            android:name=".ProveedorContenidos"
             android:exported="true"
             android:multiprocess="true">
 
