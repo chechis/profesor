@@ -1,5 +1,6 @@
 package com.example.chechis.profesor;
 
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -7,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,15 +16,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
-
 
 import com.example.chechis.profesor.adapter.tarea.Tarea;
 import com.example.chechis.profesor.adapter.tarea.TareaAdapter;
@@ -36,12 +34,11 @@ import com.example.chechis.profesor.fragmento.FragmentProfesor;
 import com.example.chechis.profesor.fragmento.FragmentAsignatura;
 import com.example.chechis.profesor.fragmento.FragmentTareas;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
@@ -63,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -75,36 +73,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
-                //new FragmentProfesor()).commit();
+        Bundle parametroBundle = this.getIntent().getExtras();
+        String usuarioBundle = parametroBundle.getString("nombre");
+        Toast.makeText(this, "Hola "+usuarioBundle, Toast.LENGTH_SHORT).show();
+        toolbar.setSubtitle(usuarioBundle);
 
         listaTarea = new ArrayList<>();
         actualizarLista();
         llenandoAdapter(listaTarea);
-
-        //RequestQueue queue = Volley.newRequestQueue(getContext());
-        //final ProgressDialog dialog = new ProgressDialog(getContext());
-        //dialog.setMessage("Por favor espere...");
-        //dialog.show();
-
-
-        //JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
-        //new Response.Listener<JSONArray>() {
-        //@Override
-        //public void onResponse(JSONArray response) {
-        //deserializarJSON(response);
-        //adapter.notifyDataSetChanged();
-        //if (dialog.isShowing()) dialog.dismiss();
-        // }
-        //},
-        //new Response.ErrorListener() {
-        //@Override
-        //public void onErrorResponse(VolleyError error) {
-        //Toast.makeText(getContext(), "Error al realizar la peticion\n "+error.getMessage(), Toast.LENGTH_SHORT).show();
-        //if (dialog.isShowing()) dialog.dismiss();
-        //}
-        //});
-        //queue.add(jsonArrayRequest);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.btn_flotatne);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -149,23 +125,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setAdapter(adapter);
     }
 
-    public void deserializarJSON (JSONArray jsonArray){
-
-        for (int i=0; i < jsonArray.length(); i++){
-            try {
-                JSONObject item = jsonArray.getJSONObject(i);
-                Tarea tarea = new Tarea();
-                //tarea.setId(item.getString("id"));
-                tarea.setTarea(item.getString("tarea"));
-                tarea.setNota(item.getString("nota"));
-
-                listaTarea.add(tarea);
-
-            }catch (JSONException e){
-                Toast.makeText(MainActivity.this, "Error al procesar la respuesta de la peticion", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
 
     @Override

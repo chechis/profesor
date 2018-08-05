@@ -42,5 +42,10 @@ public class FragmentTareas extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tareas, container, false);
         return view;
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle("Tareas");
+    }
 
 }

@@ -100,4 +100,10 @@ public class FragmentAsignatura extends Fragment {
             }
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle("Estudiantes");
+    }
 }
