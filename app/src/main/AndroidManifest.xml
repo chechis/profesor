@@ -19,22 +19,21 @@
             android:name=".InicioActivity"
             android:label="Control de Tareas">
 
+        </activity>
+
+        <provider
+            android:name=".ProveedorContenidos"
+            android:authorities="com.example.chechis.profesor.ProveedorContenidos"
+            android:exported="true"
+            android:multiprocess="true"></provider>
+
+        <activity android:name=".Main2Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-        <provider
-            android:authorities="com.example.chechis.profesor.ProveedorContenidos"
-            android:name=".ProveedorContenidos"
-            android:exported="true"
-            android:multiprocess="true">
-
-        </provider>
-
     </application>
 
 </manifest>

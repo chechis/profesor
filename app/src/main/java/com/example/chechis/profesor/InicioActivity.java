@@ -28,7 +28,6 @@ import java.util.ArrayList;
 public class InicioActivity extends AppCompatActivity {
 
     private Button btnInicio;
-    private String url = "http://192.168.1.7:8084/respondiendo-HTTP/webapi/profesor";
     private TextInputLayout usuarioEdit, contrasenaEdit;
 
     @Override
@@ -36,7 +35,9 @@ public class InicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
-
+        Bundle parametro = this.getIntent().getExtras();
+        String parametroString = parametro.getString("link");
+        String url = "http://"+parametroString+"/respondiendo-HTTP/webapi/profesor";
 
         btnInicio =(Button) findViewById(R.id.btn_inicio);
         btnInicio.setOnClickListener(new View.OnClickListener() {
@@ -52,23 +53,27 @@ public class InicioActivity extends AppCompatActivity {
         dialog.setMessage("Por favor espere...");
         dialog.show();
 
+        if (parametroString!=null){
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        deserializarJSON(response);
-                        if (dialog.isShowing()) dialog.dismiss();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(InicioActivity.this, "Error al realizar la peticion\n "+error.getMessage(), Toast.LENGTH_SHORT).show();
-                        if (dialog.isShowing()) dialog.dismiss();
-                    }
-                });
-        queue.add(jsonArrayRequest);
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            deserializarJSON(response);
+                            if (dialog.isShowing()) dialog.dismiss();
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(InicioActivity.this, "Error al realizar la peticion\n "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                            if (dialog.isShowing()) dialog.dismiss();
+                        }
+                    });
+            queue.add(jsonArrayRequest);
+        }
+
+
 
     }
 
@@ -99,6 +104,8 @@ public class InicioActivity extends AppCompatActivity {
 
         boolean login = true;
         Bundle parametro = new Bundle();
+        Bundle parametro1 = this.getIntent().getExtras();
+        String parametroString = parametro1.getString("link");
         String rol= "1";
 
         usuarioEdit = (TextInputLayout) findViewById(R.id.edit_inicio_username);
@@ -124,6 +131,7 @@ public class InicioActivity extends AppCompatActivity {
                 if (servicioInicio.confirmarUsuario(nombreUsuario, contra, rol, baseDatos, this)==2 ){
                     Intent intent = new Intent(this, MainActivity.class);
                     parametro.putString("nombre", nombreUsuario);
+                    parametro.putString("link", parametroString);
                     intent.putExtras(parametro);
                     startActivity(intent);
 

@@ -25,7 +25,7 @@ public class Servicio {
     }
 
     public void guardarTarea (String tarea, String estudiante, String asignatura, String nota,
-                                BaseDatos baseDatos, Activity activity){
+                              BaseDatos baseDatos, Activity activity){
 
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
         ContentValues content = new ContentValues();
@@ -36,13 +36,11 @@ public class Servicio {
         content.put(Estructura.EstructuraBase.COLUMN_NAME_NOTA, nota);
         sq.insert(Estructura.EstructuraBase.TABLE_NAME, null, content);
         Toast.makeText(activity, "Tarea " + tarea+ " del estudiante "+estudiante+" ha sido guardado", Toast.LENGTH_LONG).show();
-
-
-
     }
 
+
     public void modificarTarea (int id, String tarea, String estudiante, String asignatura, String nota,
-                                  BaseDatos baseDatos, Activity activity){
+                                BaseDatos baseDatos, Activity activity){
 
 
         SQLiteDatabase sq = baseDatos.getWritableDatabase();
@@ -69,7 +67,6 @@ public class Servicio {
 
         Toast.makeText(activity, "Se ha eliminado la tarea", Toast.LENGTH_SHORT).show();
     }
-
 
 
 

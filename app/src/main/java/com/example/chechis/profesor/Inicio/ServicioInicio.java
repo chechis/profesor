@@ -93,7 +93,7 @@ public class ServicioInicio {
                     if (comparador2.equals(contrasena)){
                         aux2 = 1;
                     }
-                    if (comparador3.equals(rol)){
+                    if (comparador3.equals("profesor")){
                         aux3 = 1;
                     }
                 }while (cursor.moveToNext());

@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class FragmentAsignatura extends Fragment {
 
-    private String url = "http://192.168.1.7:8084/respondiendo-HTTP/webapi/asignatura";
+    private String url = "http://192.168.1.10:8080/respondiendo-HTTP/webapi/asignatura";
     private ArrayList<Asignatura> asignaturas = new ArrayList<>();
 
     @Nullable
@@ -61,7 +61,7 @@ public class FragmentAsignatura extends Fragment {
         dialog.show();
 
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, txtBundle,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -80,9 +80,7 @@ public class FragmentAsignatura extends Fragment {
         queue.add(jsonArrayRequest);
 
 
-
     }
-
 
     public void deserializarJSON (JSONArray jsonArray){
 
@@ -106,4 +104,12 @@ public class FragmentAsignatura extends Fragment {
         super.onResume();
         getActivity().setTitle("Estudiantes");
     }
+
+    private String txtBundle;
+
+
+    public String getTxtBundle(String direccion) {
+        return txtBundle= direccion;
+    }
+
 }

@@ -22,6 +22,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.chechis.profesor.adapter.tarea.Tarea;
 import com.example.chechis.profesor.adapter.tarea.TareaAdapter;
 import com.example.chechis.profesor.alerta.AlertaEditTarea;
@@ -35,6 +41,9 @@ import com.example.chechis.profesor.fragmento.FragmentAsignatura;
 import com.example.chechis.profesor.fragmento.FragmentTareas;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,21 +53,17 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
                                                     AlertaTareaNueva.NuevaListener, TareaAdapter.TareaListener,
                                                     AlertaEditTarea.EditarListener{
-
-    private String url = "http://192.168.1.7:8084/respondiendo-HTTP/webapi/tarea";
-
     private Servicio servicio;
     private SQLiteDatabase myDatabase;
     RecyclerView recyclerView;
     private TareaAdapter adapter;
     private ArrayList<Tarea> listaTarea;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -125,8 +130,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setAdapter(adapter);
     }
 
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_Layout);
@@ -149,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.nav2:
+                FragmentAsignatura fragmentAsignatura = new FragmentAsignatura();
+                fragmentAsignatura.getTxtBundle(puerto("asignatura"));
                 getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
                         new FragmentAsignatura()).commit();
                 break;
@@ -243,5 +248,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         sq.close();
         actualizarLista();
         adapter.notifyDataSetChanged();
+    }
+
+    private String puerto (String lugar){
+
+        Bundle parametro = this.getIntent().getExtras();
+        String parametroString = parametro.getString("link");
+        String url = "http://"+parametroString+"/respondiendo-HTTP/webapi/"+lugar;
+        return url;
     }
 }
