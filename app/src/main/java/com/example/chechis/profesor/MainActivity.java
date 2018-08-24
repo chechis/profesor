@@ -147,6 +147,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id){
 
             case R.id.nav1:
+                //FragmentProfesor fragmentProfesor = new FragmentProfesor();
+                //fragmentProfesor.getTxtBundlep(puerto("profesor"));
                 getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
                         new FragmentProfesor()).commit();
                 break;

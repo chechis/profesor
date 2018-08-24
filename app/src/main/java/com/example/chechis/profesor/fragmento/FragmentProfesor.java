@@ -111,4 +111,8 @@ public class FragmentProfesor extends Fragment {
         super.onResume();
         getActivity().setTitle("Asignaturas");
     }
+    private String txtBundle;
+    public String getTxtBundlep(String direccion) {
+        return txtBundle= direccion;
+    }
 }

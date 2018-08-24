@@ -61,7 +61,7 @@ public class FragmentAsignatura extends Fragment {
         dialog.show();
 
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, txtBundle,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -106,8 +106,6 @@ public class FragmentAsignatura extends Fragment {
     }
 
     private String txtBundle;
-
-
     public String getTxtBundle(String direccion) {
         return txtBundle= direccion;
     }
