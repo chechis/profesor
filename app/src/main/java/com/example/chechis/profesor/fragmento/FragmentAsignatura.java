@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class FragmentAsignatura extends Fragment {
 
-    private String url = "http://192.168.1.10:8080/respondiendo-HTTP/webapi/asignatura";
+    private String url = "http://192.168.1.7:8084/respondiendo-HTTP/webapi/asignatura";
     private ArrayList<Asignatura> asignaturas = new ArrayList<>();
 
     @Nullable

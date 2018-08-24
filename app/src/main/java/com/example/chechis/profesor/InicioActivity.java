@@ -2,6 +2,7 @@ package com.example.chechis.profesor;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.chechis.profesor.Inicio.BaseDatosInicio;
 import com.example.chechis.profesor.Inicio.ServicioInicio;
 import com.example.chechis.profesor.adapter.profesor.Profesor;
+import com.example.chechis.profesor.almacenamiento.PreferenceConstan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,17 +29,25 @@ import java.util.ArrayList;
 
 public class InicioActivity extends AppCompatActivity {
 
+
+    private SharedPreferences pref;
     private Button btnInicio;
     private TextInputLayout usuarioEdit, contrasenaEdit;
+    private static final String KEY_DIR = "Direccion";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
-        Bundle parametro = this.getIntent().getExtras();
-        String parametroString = parametro.getString("link");
-        String url = "http://"+parametroString+"/respondiendo-HTTP/webapi/profesor";
+
+        String urlPref = savedInstanceState.getString(KEY_DIR, null);
+
+        Toast.makeText(this, urlPref, Toast.LENGTH_SHORT).show();
+
+        //Bundle parametro = this.getIntent().getExtras();
+        //String parametroString = parametro.getString("link");
+        String url = "http://"+urlPref+"/respondiendo-HTTP/webapi/profesor";
 
         btnInicio =(Button) findViewById(R.id.btn_inicio);
         btnInicio.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +63,7 @@ public class InicioActivity extends AppCompatActivity {
         dialog.setMessage("Por favor espere...");
         dialog.show();
 
-        if (parametroString!=null){
+        if (urlPref!=null){
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
