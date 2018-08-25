@@ -69,7 +69,7 @@ public class FragmentProfesor extends Fragment {
         dialog.show();
 
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, txtBundle,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -109,7 +109,7 @@ public class FragmentProfesor extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle("Asignaturas");
+        getActivity().setTitle("Usuarios");
     }
     private String txtBundle;
     public String getTxtBundlep(String direccion) {

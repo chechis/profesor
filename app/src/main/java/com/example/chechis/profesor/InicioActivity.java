@@ -40,13 +40,9 @@ public class InicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
+        pref = getSharedPreferences(PreferenceConstan.PREFERENCE_NAME, MODE_PRIVATE);
+        String urlPref = pref.getString(PreferenceConstan.PREF_KEY_USERNAME, null);
 
-        String urlPref = savedInstanceState.getString(KEY_DIR, null);
-
-        Toast.makeText(this, urlPref, Toast.LENGTH_SHORT).show();
-
-        //Bundle parametro = this.getIntent().getExtras();
-        //String parametroString = parametro.getString("link");
         String url = "http://"+urlPref+"/respondiendo-HTTP/webapi/profesor";
 
         btnInicio =(Button) findViewById(R.id.btn_inicio);
@@ -63,7 +59,7 @@ public class InicioActivity extends AppCompatActivity {
         dialog.setMessage("Por favor espere...");
         dialog.show();
 
-        if (urlPref!=null){
+        if (url!=null){
 
             JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                     new Response.Listener<JSONArray>() {
@@ -85,6 +81,11 @@ public class InicioActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     public void deserializarJSON (JSONArray jsonArray){
@@ -114,8 +115,7 @@ public class InicioActivity extends AppCompatActivity {
 
         boolean login = true;
         Bundle parametro = new Bundle();
-        Bundle parametro1 = this.getIntent().getExtras();
-        String parametroString = parametro1.getString("link");
+
         String rol= "1";
 
         usuarioEdit = (TextInputLayout) findViewById(R.id.edit_inicio_username);
@@ -141,7 +141,6 @@ public class InicioActivity extends AppCompatActivity {
                 if (servicioInicio.confirmarUsuario(nombreUsuario, contra, rol, baseDatos, this)==2 ){
                     Intent intent = new Intent(this, MainActivity.class);
                     parametro.putString("nombre", nombreUsuario);
-                    parametro.putString("link", parametroString);
                     intent.putExtras(parametro);
                     startActivity(intent);
 

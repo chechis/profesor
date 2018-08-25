@@ -1,6 +1,7 @@
 package com.example.chechis.profesor.fragmento;
 
 import android.app.ProgressDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,6 +24,7 @@ import com.example.chechis.profesor.adapter.asignatura.Asignatura;
 import com.example.chechis.profesor.adapter.asignatura.AsignaturaAdapter;
 import com.example.chechis.profesor.adapter.tarea.Tarea;
 import com.example.chechis.profesor.adapter.tarea.TareaAdapter;
+import com.example.chechis.profesor.almacenamiento.PreferenceConstan;
 
 
 import org.json.JSONArray;
@@ -32,8 +35,9 @@ import java.util.ArrayList;
 
 public class FragmentAsignatura extends Fragment {
 
-    private String url = "http://192.168.1.7:8084/respondiendo-HTTP/webapi/asignatura";
+    private String url = "http://192.168.1.10:8080/respondiendo-HTTP/webapi/asignatura";
     private ArrayList<Asignatura> asignaturas = new ArrayList<>();
+
 
     @Nullable
     @Override
@@ -45,6 +49,7 @@ public class FragmentAsignatura extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
 
         RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.recycler_asignatura);
@@ -60,7 +65,10 @@ public class FragmentAsignatura extends Fragment {
         dialog.setMessage("Por favor espere...");
         dialog.show();
 
+        String urlAsignatura = "ll";
 
+
+        Toast.makeText(getContext(), urlAsignatura, Toast.LENGTH_SHORT).show();
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
@@ -102,12 +110,9 @@ public class FragmentAsignatura extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle("Estudiantes");
+        getActivity().setTitle("Asignaturas");
     }
 
-    private String txtBundle;
-    public String getTxtBundle(String direccion) {
-        return txtBundle= direccion;
-    }
+
 
 }

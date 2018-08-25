@@ -26,19 +26,21 @@ public class Main2Activity extends AppCompatActivity {
         final TextInputLayout editDireccion = (TextInputLayout) findViewById(R.id.edit_direccion);
         final TextInputLayout editPuerto = (TextInputLayout) findViewById(R.id.edit_puerto);
 
-        pref = getSharedPreferences(PreferenceConstan.PREFERENCE_LOGIN, MODE_PRIVATE);
+
+
+        pref = getSharedPreferences(PreferenceConstan.PREFERENCE_NAME, MODE_PRIVATE);
         bton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (editDireccion!= null && editPuerto!= null){
-                    Intent intent = new Intent(Main2Activity.this, InicioActivity.class);
-                    startActivity(intent);
+                   Intent intent = new Intent(Main2Activity.this, InicioActivity.class);
+                   startActivity(intent);
+
                 }
 
 
             }
         });
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,8 +48,9 @@ public class Main2Activity extends AppCompatActivity {
                 SharedPreferences.Editor edit = pref.edit();
                 edit.putString(PreferenceConstan.PREF_KEY_USERNAME, link);
                 edit.apply();
+                Toast.makeText(Main2Activity.this, "Dirección y puerto guardado", Toast.LENGTH_SHORT).show();
 
-            }
+                            }
         });
     }
 }

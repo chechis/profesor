@@ -3,12 +3,14 @@ package com.example.chechis.profesor;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -35,6 +37,7 @@ import com.example.chechis.profesor.alerta.AlertaTareaNueva;
 import com.example.chechis.profesor.alerta.ModeloAlerta;
 import com.example.chechis.profesor.almacenamiento.BaseDatos;
 import com.example.chechis.profesor.almacenamiento.Estructura;
+import com.example.chechis.profesor.almacenamiento.PreferenceConstan;
 import com.example.chechis.profesor.almacenamiento.Servicio;
 import com.example.chechis.profesor.fragmento.FragmentProfesor;
 import com.example.chechis.profesor.fragmento.FragmentAsignatura;
@@ -58,13 +61,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     RecyclerView recyclerView;
     private TareaAdapter adapter;
     private ArrayList<Tarea> listaTarea;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -147,15 +149,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id){
 
             case R.id.nav1:
-                //FragmentProfesor fragmentProfesor = new FragmentProfesor();
-                //fragmentProfesor.getTxtBundlep(puerto("profesor"));
                 getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
                         new FragmentProfesor()).commit();
                 break;
 
             case R.id.nav2:
-                FragmentAsignatura fragmentAsignatura = new FragmentAsignatura();
-                fragmentAsignatura.getTxtBundle(puerto("asignatura"));
                 getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
                         new FragmentAsignatura()).commit();
                 break;
@@ -252,11 +250,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.notifyDataSetChanged();
     }
 
-    private String puerto (String lugar){
-
-        Bundle parametro = this.getIntent().getExtras();
-        String parametroString = parametro.getString("link");
-        String url = "http://"+parametroString+"/respondiendo-HTTP/webapi/"+lugar;
-        return url;
-    }
 }
