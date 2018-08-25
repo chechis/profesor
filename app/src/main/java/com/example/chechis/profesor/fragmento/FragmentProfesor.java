@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
+import com.example.chechis.profesor.MainActivity;
 import com.example.chechis.profesor.R;
 import com.example.chechis.profesor.adapter.asignatura.Asignatura;
 import com.example.chechis.profesor.adapter.asignatura.AsignaturaAdapter;
@@ -37,7 +38,6 @@ import java.util.ArrayList;
 
 public class FragmentProfesor extends Fragment {
 
-    private String url = "http://192.168.1.7:8084/respondiendo-HTTP/webapi/profesor";
     private ArrayList<Profesor> profesores= new ArrayList<>();
 
     @Nullable
@@ -68,8 +68,9 @@ public class FragmentProfesor extends Fragment {
         dialog.setMessage("Por favor espere...");
         dialog.show();
 
+        MainActivity mainActivity = (MainActivity) getActivity();
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, txtBundle,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, mainActivity.getUrl()+"profesor",
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -110,9 +111,5 @@ public class FragmentProfesor extends Fragment {
     public void onResume() {
         super.onResume();
         getActivity().setTitle("Usuarios");
-    }
-    private String txtBundle;
-    public String getTxtBundlep(String direccion) {
-        return txtBundle= direccion;
     }
 }

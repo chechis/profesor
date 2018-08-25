@@ -27,5 +27,4 @@
         android:theme="@style/MyFloatingButton"
         app:rippleColor="@color/colorAccent" />
 
-
 </RelativeLayout>

@@ -22,6 +22,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -47,6 +48,7 @@ import com.example.chechis.profesor.fragmento.FragmentTareas;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,11 +64,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TareaAdapter adapter;
     private ArrayList<Tarea> listaTarea;
     SharedPreferences pref;
+    String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pref = getSharedPreferences(PreferenceConstan.PREFERENCE_NAME, MODE_PRIVATE);
+        String urlPref = pref.getString(PreferenceConstan.PREF_KEY_USERNAME, null);
+        url = "http://"+urlPref+"/respondiendo-HTTP/webapi/";
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -161,7 +176,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav3:
                 getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,
                         new FragmentTareas()).commit();
-
                 break;
         }
 

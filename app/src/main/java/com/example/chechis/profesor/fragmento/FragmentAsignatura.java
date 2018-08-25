@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.chechis.profesor.MainActivity;
 import com.example.chechis.profesor.R;
 import com.example.chechis.profesor.adapter.asignatura.Asignatura;
 import com.example.chechis.profesor.adapter.asignatura.AsignaturaAdapter;
@@ -38,7 +39,6 @@ public class FragmentAsignatura extends Fragment {
     private String url = "http://192.168.1.10:8080/respondiendo-HTTP/webapi/asignatura";
     private ArrayList<Asignatura> asignaturas = new ArrayList<>();
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,8 +49,6 @@ public class FragmentAsignatura extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
 
         RecyclerView recyclerView= (RecyclerView) view.findViewById(R.id.recycler_asignatura);
         recyclerView.setHasFixedSize(true);
@@ -65,11 +63,9 @@ public class FragmentAsignatura extends Fragment {
         dialog.setMessage("Por favor espere...");
         dialog.show();
 
-        String urlAsignatura = "ll";
+        MainActivity mainActivity = (MainActivity) getActivity();
 
-
-        Toast.makeText(getContext(), urlAsignatura, Toast.LENGTH_SHORT).show();
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, mainActivity.getUrl()+"asignatura",
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -112,7 +108,5 @@ public class FragmentAsignatura extends Fragment {
         super.onResume();
         getActivity().setTitle("Asignaturas");
     }
-
-
 
 }
