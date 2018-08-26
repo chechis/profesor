@@ -79,8 +79,8 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaHolder>
 
 
         holder.txtTarea.setText("Tarea  "+tarea.getTarea());
-        holder.txtEstudiante.setText("Asignatura  "+tarea.getEstudiante());
-        holder.txtAsignatura.setText("Estudiante  "+tarea.getAsignatura());
+        holder.txtEstudiante.setText(tarea.getEstudiante());
+        holder.txtAsignatura.setText("Estudiante "+tarea.getAsignatura());
         holder.txtNota.setText("Nota  "+tarea.getNota());
     }
 
