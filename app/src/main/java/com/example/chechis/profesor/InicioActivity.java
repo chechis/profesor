@@ -71,7 +71,8 @@ public class InicioActivity extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(InicioActivity.this, "Error al realizar la peticion\n "+error.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(InicioActivity.this, "Error al realizar la peticion\n "+"Prueba otra vez ingresar la direccion",
+                                    Toast.LENGTH_LONG).show();
                             if (dialog.isShowing()) dialog.dismiss();
                         }
                     });

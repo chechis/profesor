@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         adapter.setTareaListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_tarea);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2,
+        recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 1,
                 GridLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
     }

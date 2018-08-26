@@ -78,10 +78,10 @@ public class TareaAdapter extends RecyclerView.Adapter<TareaAdapter.TareaHolder>
         Tarea tarea = tareas.get(position);
 
 
-        holder.txtTarea.setText("Tarea "+tarea.getTarea());
-        holder.txtEstudiante.setText("Estudiante "+tarea.getEstudiante());
-        holder.txtAsignatura.setText("Asignatura "+tarea.getAsignatura());
-        holder.txtNota.setText("Nota "+tarea.getNota());
+        holder.txtTarea.setText("Tarea  "+tarea.getTarea());
+        holder.txtEstudiante.setText("Asignatura  "+tarea.getEstudiante());
+        holder.txtAsignatura.setText("Estudiante  "+tarea.getAsignatura());
+        holder.txtNota.setText("Nota  "+tarea.getNota());
     }
 
     @Override
