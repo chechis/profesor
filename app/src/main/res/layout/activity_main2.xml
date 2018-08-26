@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="102dp"
-        android:text="Ingresa tu dirección IP" />
+        android:text="@string/ingresa_tu_direcci_n_ip" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/edit_direccion"
@@ -22,12 +22,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="136dp">
+        android:layout_marginTop="128dp">
 
         <EditText
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:hint="192.168.x.x" />
+            android:hint="@string/_192_168_x_x" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Ingresa tu puerto del servidor Tomcat " />
+        android:text="@string/ingresa_tu_puerto_del_servidor_tomcat" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/edit_puerto"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="176dp">
+        android:layout_marginBottom="182dp">
 
         <EditText
             android:layout_width="200dp"
@@ -53,26 +53,26 @@
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/btn_direccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
+        android:layout_alignEnd="@+id/edit_direccion"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="104dp"
-        android:text="Iniciar"
-        android:id="@+id/btn_direccion"
+        android:layout_marginBottom="106dp"
         android:background="@color/cardview_light_background"
+        android:text="@string/iniciar"
         android:theme="@style/Widget.AppCompat.Button.Borderless" />
 
     <Button
         android:id="@+id/btn_guardar_dir"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
 
-        android:layout_marginBottom="41dp"
+        android:layout_alignStart="@+id/edit_direccion"
+        android:layout_alignTop="@+id/btn_direccion"
         android:background="@color/cardview_light_background"
-        android:text="Guardar"
+        android:text="@string/guardar"
         android:theme="@style/Widget.AppCompat.Button.Borderless" />
 
 

@@ -33,7 +33,6 @@ public class InicioActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private Button btnInicio;
     private TextInputLayout usuarioEdit, contrasenaEdit;
-    private static final String KEY_DIR = "Direccion";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

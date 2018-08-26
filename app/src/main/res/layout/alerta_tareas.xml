@@ -23,7 +23,7 @@
             android:id="@+id/edit_nombre_tarea2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre de la Tarea"
+            android:hint="@string/nombre_de_la_tarea"
             android:inputType="text"/>
 
     </android.support.design.widget.TextInputLayout>
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_cancelar"
-            android:text="CANCELAR"
+            android:text="@string/cancelar"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textColor="@color/colorAccent"/>
 
@@ -86,7 +86,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btn_registrar"
-            android:text="REGISTRAR"
+            android:text="@string/registrar"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textColor="@color/colorAccent"/>
 

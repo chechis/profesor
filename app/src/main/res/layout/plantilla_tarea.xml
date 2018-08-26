@@ -25,8 +25,7 @@
                 android:id="@+id/txt_tarea_tarea"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:text="Tarea"
+                android:text="@string/tarea"
                 android:padding="5dp"
                 android:textStyle="bold|italic"
                 />
@@ -35,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Estudiante"
+                android:text="@string/estudiante"
                 android:padding="5dp"
                 android:textStyle="bold|italic"
                 />
@@ -44,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Asignatura"
+                android:text="@string/asignatura"
                 android:padding="5dp"
                 android:textStyle="bold|italic"
                 />
@@ -53,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="Nota"
+                android:text="@string/nota"
                 android:padding="5dp"
                 android:textStyle="bold|italic"
                 />

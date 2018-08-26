@@ -5,7 +5,26 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nueva_tarea">Nueva Tarea</string>
     <string name="nota">Nota</string>
-
+    <string name="inicie_sesi_n_para_empezar">Inicie sesión para empezar</string>
+    <string name="usuario">Usuario</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="iniciar_sesion">INICIAR SESION</string>
+    <string name="ingresa_tu_direcci_n_ip">Ingresa tu dirección IP</string>
+    <string name="_192_168_x_x">192.168.x.x</string>
+    <string name="ingresa_tu_puerto_del_servidor_tomcat">Ingresa tu puerto del servidor Tomcat</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="guardar">Guardar</string>
+    <string name="nombre_de_la_tarea">Nombre de la Tarea</string>
+    <string name="cancelar">CANCELAR</string>
+    <string name="registrar">REGISTRAR</string>
+    <string name="profesor">Profesor</string>
+    <string name="id">ID</string>
+    <string name="rol">Rol</string>
+    <string name="tarea">Tarea</string>
+    <string name="estudiante">Estudiante</string>
+    <string name="asignatura">Asignatura</string>
+    <string name="estudiantes">Estudiantes</string>
+    <string name="tareas">Tareas</string>
     <string-array name="spinner_asignaturas">
         <item>Matemática</item>
         <item>Biología</item>

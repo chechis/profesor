@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_nombre_usuario_nav"
-            android:text="Prfesor"
+            android:text="@string/profesor"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textStyle="bold"/>
 
