@@ -39,6 +39,7 @@ public class InicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
+
         pref = getSharedPreferences(PreferenceConstan.PREFERENCE_NAME, MODE_PRIVATE);
         String urlPref = pref.getString(PreferenceConstan.PREF_KEY_USERNAME, null);
 
@@ -86,6 +87,9 @@ public class InicioActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+
+
     }
 
     public void deserializarJSON (JSONArray jsonArray){

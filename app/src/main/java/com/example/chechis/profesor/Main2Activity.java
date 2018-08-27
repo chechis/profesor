@@ -33,7 +33,10 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (editDireccion!= null && editPuerto!= null){
+                    Bundle parametro = new Bundle();
                    Intent intent = new Intent(Main2Activity.this, InicioActivity.class);
+                   parametro.putString("nombre", );
+                   intent.putExtras(parametro);
                    startActivity(intent);
 
                 }
@@ -52,5 +55,12 @@ public class Main2Activity extends AppCompatActivity {
 
                             }
         });
+    }
+
+    private void bundlePreference (String direccion, String puerto){
+        String link2 = editDireccion.getEditText().getText().toString()+":"+editPuerto.getEditText().getText().toString();
+        SharedPreferences.Editor edit = pref.edit();
+        edit.putString(PreferenceConstan.PREF_KEY_USERNAME, link2);
+        edit.apply();
     }
 }
