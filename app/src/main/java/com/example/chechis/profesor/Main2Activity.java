@@ -15,6 +15,7 @@ import com.example.chechis.profesor.almacenamiento.PreferenceConstan;
 public class Main2Activity extends AppCompatActivity {
 
     private SharedPreferences pref;
+    private Bundle parametro = new Bundle();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,15 +34,11 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (editDireccion!= null && editPuerto!= null){
-                    Bundle parametro = new Bundle();
-                   Intent intent = new Intent(Main2Activity.this, InicioActivity.class);
-                   parametro.putString("nombre", );
-                   intent.putExtras(parametro);
-                   startActivity(intent);
-
+                    Intent intent = new Intent(Main2Activity.this, InicioActivity.class);
+                    parametro.putString("url", editDireccion.getEditText().getText().toString()+":"+editPuerto.getEditText().getText().toString());
+                    intent.putExtras(parametro);
+                    startActivity(intent);
                 }
-
-
             }
         });
         button.setOnClickListener(new View.OnClickListener() {
@@ -57,10 +54,5 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
-    private void bundlePreference (String direccion, String puerto){
-        String link2 = editDireccion.getEditText().getText().toString()+":"+editPuerto.getEditText().getText().toString();
-        SharedPreferences.Editor edit = pref.edit();
-        edit.putString(PreferenceConstan.PREF_KEY_USERNAME, link2);
-        edit.apply();
-    }
+
 }

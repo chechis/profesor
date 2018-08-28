@@ -3,9 +3,9 @@ package com.example.chechis.profesor;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -18,14 +18,10 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.chechis.profesor.Inicio.BaseDatosInicio;
 import com.example.chechis.profesor.Inicio.ServicioInicio;
-import com.example.chechis.profesor.adapter.profesor.Profesor;
-import com.example.chechis.profesor.almacenamiento.PreferenceConstan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 public class InicioActivity extends AppCompatActivity {
 
@@ -33,17 +29,17 @@ public class InicioActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private Button btnInicio;
     private TextInputLayout usuarioEdit, contrasenaEdit;
+     String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
+        Bundle parametro = this.getIntent().getExtras();
+        String urlBundle = parametro.getString("url");
+        String url = "http://"+urlBundle+"/respondiendo-HTTP/webapi/profesor";
 
-        pref = getSharedPreferences(PreferenceConstan.PREFERENCE_NAME, MODE_PRIVATE);
-        String urlPref = pref.getString(PreferenceConstan.PREF_KEY_USERNAME, null);
-
-        String url = "http://"+urlPref+"/respondiendo-HTTP/webapi/profesor";
 
         btnInicio =(Button) findViewById(R.id.btn_inicio);
         btnInicio.setOnClickListener(new View.OnClickListener() {
@@ -59,34 +55,25 @@ public class InicioActivity extends AppCompatActivity {
         dialog.setMessage("Por favor espere...");
         dialog.show();
 
-        if (url!=null){
 
-            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
-                    new Response.Listener<JSONArray>() {
-                        @Override
-                        public void onResponse(JSONArray response) {
-                            deserializarJSON(response);
-                            if (dialog.isShowing()) dialog.dismiss();
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(InicioActivity.this, "Error al realizar la peticion\n "+"Prueba otra vez ingresar la direccion",
-                                    Toast.LENGTH_LONG).show();
-                            if (dialog.isShowing()) dialog.dismiss();
-                        }
-                    });
-            queue.add(jsonArrayRequest);
-        }
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://172.16.27.103:8080/respondiendo-HTTP/webapi/profesor",
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        deserializarJSON(response);
+                        if (dialog.isShowing()) dialog.dismiss();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(InicioActivity.this, "Error al realizar la peticion\n " + "Prueba otra vez ingresar la direccion",
+                                Toast.LENGTH_LONG).show();
+                        if (dialog.isShowing()) dialog.dismiss();
+                    }
+                });
+        queue.add(jsonArrayRequest);
 
-
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
 
 
 
