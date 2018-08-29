@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.chechis.profesor.Inicio.BaseDatosInicio;
 import com.example.chechis.profesor.Inicio.ServicioInicio;
+import com.example.chechis.profesor.almacenamiento.PreferenceConstan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,16 +30,18 @@ public class InicioActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private Button btnInicio;
     private TextInputLayout usuarioEdit, contrasenaEdit;
-     String url;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
+
         Bundle parametro = this.getIntent().getExtras();
         String urlBundle = parametro.getString("url");
-        String url = "http://"+urlBundle+"/respondiendo-HTTP/webapi/profesor";
+        String url = "http://" + urlBundle + "/respondiendo-HTTP/webapi/profesor";
 
 
         btnInicio =(Button) findViewById(R.id.btn_inicio);
@@ -54,6 +57,7 @@ public class InicioActivity extends AppCompatActivity {
         final ProgressDialog dialog = new ProgressDialog(InicioActivity.this);
         dialog.setMessage("Por favor espere...");
         dialog.show();
+
 
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
@@ -73,6 +77,8 @@ public class InicioActivity extends AppCompatActivity {
                     }
                 });
         queue.add(jsonArrayRequest);
+
+
 
 
 
