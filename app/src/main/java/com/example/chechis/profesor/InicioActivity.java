@@ -56,7 +56,7 @@ public class InicioActivity extends AppCompatActivity {
         dialog.show();
 
 
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, "http://172.16.27.103:8080/respondiendo-HTTP/webapi/profesor",
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
