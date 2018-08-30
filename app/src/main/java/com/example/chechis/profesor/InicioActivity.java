@@ -32,8 +32,7 @@ public class InicioActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private Button btnInicio;
     private TextInputLayout usuarioEdit, contrasenaEdit;
-    private String url = null;
-    private String urlBundle = null;
+    private String url = "";
 
 
 
@@ -43,11 +42,10 @@ public class InicioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inicio);
 
         TextView textView = (TextView) findViewById(R.id.txt_inicio_dir);
+        pref = getSharedPreferences(PreferenceConstan.PREFERENCE_NAME, MODE_PRIVATE);
+        String urlPref = pref.getString(PreferenceConstan.PREF_KEY_USERNAME, null);
 
-        Bundle parametro = this.getIntent().getExtras();
-        urlBundle = parametro.getString("url");
-        url = "http://" + urlBundle + "/respondiendo-HTTP/webapi/profesor";
-        Toast.makeText(this, url, Toast.LENGTH_LONG).show();
+
 
 
         btnInicio =(Button) findViewById(R.id.btn_inicio);
@@ -59,28 +57,11 @@ public class InicioActivity extends AppCompatActivity {
         });
 
 
-
-        if (urlBundle!= null && url != null){
-            json(url);
-
-        }if (urlBundle== ""){
-            pref = getSharedPreferences(PreferenceConstan.PREFERENCE_NAME, MODE_PRIVATE);
-            String urlPref = pref.getString(PreferenceConstan.PREF_KEY_USERNAME, null);
+        if (urlPref!= null){
             url = "http://"+urlPref+"/respondiendo-HTTP/webapi/profesor";
             textView.setText(url);
             json(url);
-        }else {
-            Intent intent = new Intent(this, Main2Activity.class);
-            startActivity(intent);
-            Toast.makeText(this, "Error vuelve a ingresar la direccion y puerto", Toast.LENGTH_SHORT).show();
-
         }
-
-
-
-
-
-
 
     }
 
@@ -102,8 +83,6 @@ public class InicioActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(InicioActivity.this, "Error al realizar la peticion",
-                                Toast.LENGTH_LONG).show();
                         if (dialog.isShowing()) dialog.dismiss();
                     }
                 });

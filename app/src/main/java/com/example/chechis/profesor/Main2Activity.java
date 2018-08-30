@@ -2,6 +2,7 @@ package com.example.chechis.profesor;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,8 +37,9 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (editDireccion!= null && editPuerto!= null){
+                    String texto = editDireccion.getEditText().getText().toString()+":"+editPuerto.getEditText().getText().toString();
                     Intent intent = new Intent(Main2Activity.this, InicioActivity.class);
-                    parametro.putString("url", editDireccion.getEditText().getText().toString()+":"+editPuerto.getEditText().getText().toString());
+                    parametro.putString("url", texto);
                     intent.putExtras(parametro);
                     startActivity(intent);
                 }
@@ -50,8 +52,7 @@ public class Main2Activity extends AppCompatActivity {
                 SharedPreferences.Editor edit = pref.edit();
                 edit.putString(PreferenceConstan.PREF_KEY_USERNAME, link);
                 edit.apply();
-
-                Toast.makeText(Main2Activity.this, "Dirección y puerto guardado", Toast.LENGTH_SHORT).show();
+                Snackbar.make(view, "Datos guardados correctamente", Snackbar.LENGTH_SHORT).show();
                 textView.setText(link);
 
 
