@@ -4,10 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,6 +32,8 @@ public class InicioActivity extends AppCompatActivity {
     private SharedPreferences pref;
     private Button btnInicio;
     private TextInputLayout usuarioEdit, contrasenaEdit;
+    private String url = null;
+    private String urlBundle = null;
 
 
 
@@ -38,10 +42,12 @@ public class InicioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
+        TextView textView = (TextView) findViewById(R.id.txt_inicio_dir);
 
         Bundle parametro = this.getIntent().getExtras();
-        String urlBundle = parametro.getString("url");
-        String url = "http://" + urlBundle + "/respondiendo-HTTP/webapi/profesor";
+        urlBundle = parametro.getString("url");
+        url = "http://" + urlBundle + "/respondiendo-HTTP/webapi/profesor";
+        Toast.makeText(this, url, Toast.LENGTH_LONG).show();
 
 
         btnInicio =(Button) findViewById(R.id.btn_inicio);
@@ -53,12 +59,37 @@ public class InicioActivity extends AppCompatActivity {
         });
 
 
+
+        if (urlBundle!= null && url != null){
+            json(url);
+
+        }if (urlBundle== ""){
+            pref = getSharedPreferences(PreferenceConstan.PREFERENCE_NAME, MODE_PRIVATE);
+            String urlPref = pref.getString(PreferenceConstan.PREF_KEY_USERNAME, null);
+            url = "http://"+urlPref+"/respondiendo-HTTP/webapi/profesor";
+            textView.setText(url);
+            json(url);
+        }else {
+            Intent intent = new Intent(this, Main2Activity.class);
+            startActivity(intent);
+            Toast.makeText(this, "Error vuelve a ingresar la direccion y puerto", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+
+
+
+
+
+    }
+
+    private void json (String url){
+
         RequestQueue queue = Volley.newRequestQueue(InicioActivity.this);
         final ProgressDialog dialog = new ProgressDialog(InicioActivity.this);
         dialog.setMessage("Por favor espere...");
         dialog.show();
-
-
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url,
                 new Response.Listener<JSONArray>() {
@@ -71,18 +102,12 @@ public class InicioActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(InicioActivity.this, "Error al realizar la peticion\n " + "Prueba otra vez ingresar la direccion",
+                        Toast.makeText(InicioActivity.this, "Error al realizar la peticion",
                                 Toast.LENGTH_LONG).show();
                         if (dialog.isShowing()) dialog.dismiss();
                     }
                 });
         queue.add(jsonArrayRequest);
-
-
-
-
-
-
     }
 
     public void deserializarJSON (JSONArray jsonArray){

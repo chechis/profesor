@@ -75,6 +75,15 @@
         android:text="@string/guardar"
         android:theme="@style/Widget.AppCompat.Button.Borderless" />
 
+    <TextView
+        android:id="@+id/txt_direccionypuerto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="55dp"
+        android:text="Direccion y puerto" />
+
 
 
 

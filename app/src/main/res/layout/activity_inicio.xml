@@ -86,9 +86,19 @@
                     android:layout_height="wrap_content"
                     android:text="@string/iniciar_sesion" />
 
+
+
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Direccion"
+                android:id="@+id/txt_inicio_dir"/>
 
         </LinearLayout>
+
+
 
     </ScrollView>
 
