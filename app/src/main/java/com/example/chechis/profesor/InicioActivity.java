@@ -45,9 +45,6 @@ public class InicioActivity extends AppCompatActivity {
         pref = getSharedPreferences(PreferenceConstan.PREFERENCE_NAME, MODE_PRIVATE);
         String urlPref = pref.getString(PreferenceConstan.PREF_KEY_USERNAME, null);
 
-
-
-
         btnInicio =(Button) findViewById(R.id.btn_inicio);
         btnInicio.setOnClickListener(new View.OnClickListener() {
             @Override

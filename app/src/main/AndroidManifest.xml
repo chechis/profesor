@@ -25,7 +25,7 @@
             android:name=".ProveedorContenidos"
             android:authorities="com.example.chechis.profesor.ProveedorContenidos"
             android:exported="true"
-            android:multiprocess="true"></provider>
+            android:multiprocess="true"/>
 
         <activity android:name=".Main2Activity">
             <intent-filter>

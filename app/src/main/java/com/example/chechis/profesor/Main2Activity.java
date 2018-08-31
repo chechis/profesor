@@ -37,10 +37,7 @@ public class Main2Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (editDireccion!= null && editPuerto!= null){
-                    String texto = editDireccion.getEditText().getText().toString()+":"+editPuerto.getEditText().getText().toString();
                     Intent intent = new Intent(Main2Activity.this, InicioActivity.class);
-                    parametro.putString("url", texto);
-                    intent.putExtras(parametro);
                     startActivity(intent);
                 }
             }
